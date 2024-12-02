@@ -48,6 +48,9 @@ body {
 .boton-valor:hover {
   text-shadow: 0 0 4px white;
 }
+.btn-activo {
+  text-shadow: 0 0 4px white;
+}
 
 .boton-parar:hover {
   background-color: #fcfcae !important;

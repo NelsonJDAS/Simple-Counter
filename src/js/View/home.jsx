@@ -4,6 +4,7 @@ import Contador from "../Components/Contador";
 import Cronometro from "../Components/Cronometro";
 import ContenedorValores from "../Components/ContenedorValores";
 import ContenedorTiempoUsuario from "../Components/ContenedorTiempoUsuario";
+import { Toaster, toast } from "sonner";
 
 //create your first component
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
 
   return (
     <div className="align-content-center contenedor-pagina w-100 text-center">
+      <Toaster position="top-center" richColors />
       <div className="text-center fw-bold text-white">
         <h1>Widgets Interactivos</h1>
       </div>

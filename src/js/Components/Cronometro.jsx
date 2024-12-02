@@ -1,22 +1,54 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { TiStopwatch } from "react-icons/ti";
+import { Toaster, toast } from "sonner";
 
-const Cronometro = () => {
-  const [contador, setContador] = useState(0);
-  const [parar, setParar] = useState(false);
+const Cronometro = ({ Tiempo }) => {
+  const [contador, setContador] = useState("---");
+  const CronometroRef = useRef(null);
+  const InputRef = useRef(null);
 
-  const AccionContador = (Accion) => {
-    const Contar = setInterval(() => {
-      if (Accion == "Empezar") {
-        setContador((prevContador) => prevContador + 1000000);
-      } else if (Accion == "Reiniciar") {
-        clearInterval(Contar);
-        setContador(0);
-      } else if (Accion == "Parar") {
-        setContador(Contador);
+  const handleElementoTiempo = (e) => {
+    setContador(e.target.value);
+    if (e.target.value > 999999999999999999999) {
+      toast.error("Juanjo NO... no podras hoy");
+      InputRef.current.disabled = true;
+    } else if (e.target.value == "") {
+      setContador("---");
+    }
+
+    if (e.key === "Enter") {
+      if (e.target.value == "") {
+        setContador("---");
+        clearInterval(CronometroRef.current);
+        toast.error("Pon un valor valido");
+      } else {
+        InputRef.current.disabled = true;
+        InputRef.current.value = "";
+        EmpezarCronometro();
       }
-    }, 1000);
+    }
   };
+
+  const cronometro = () => {
+    CronometroRef.current = setInterval(() => {
+      setContador((prevContador) => prevContador - 1);
+    }, 1000);
+    if (!CronometroRef.current) {
+      clearInterval(CronometroRef.current);
+    }
+  };
+
+  const EmpezarCronometro = () => {
+    if (contador > 0) {
+      cronometro();
+    }
+  };
+
+  if (contador === 0) {
+    InputRef.current.disabled = false;
+    clearInterval(CronometroRef.current);
+    toast.error("Cronometro finalizado");
+  }
 
   return (
     <div className="contenedor-individual border rounded bg-dark border-white row">
@@ -31,14 +63,18 @@ const Cronometro = () => {
             .toString()
             .split("")
             .map((numero) => {
-              return <div className="num rounded mx-1">{numero}</div>;
+              return <div className="num p-0 rounded mx-0">{numero}</div>;
             })}
         </div>
       </div>
-      <div className="col-12 align-content-center text-center">
+      <div className="col-12 align-content-center text-center d-flex justify-content-center">
         <input
+          ref={InputRef}
           className="form-label text-center rounded-pill "
-          placeholder="Coloca tu numero aqui"
+          placeholder="Enter para iniciar"
+          onChange={handleElementoTiempo}
+          onKeyDown={handleElementoTiempo}
+          type="number"
         />
       </div>
     </div>

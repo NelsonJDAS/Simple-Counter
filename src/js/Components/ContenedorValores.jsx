@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const ContenedorValores = () => {
+  const [input, setInput] = useState("seg");
   return (
     <div className="contenedor-individual border rounded bg-black border-white row">
       <div className="col-12 text-center align-content-start">
@@ -14,16 +15,52 @@ const ContenedorValores = () => {
       </div>
       <div className="col-12 align-content-center px-0">
         <div className="d-flex justify-content-around">
-          <button className="btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold">
+          <button
+            className={
+              input === "seg"
+                ? "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold btn-activo"
+                : "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold"
+            }
+            onClick={() => {
+              setInput("seg");
+            }}
+          >
             Seg
           </button>
-          <button className="btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold">
+          <button
+            className={
+              input == "min"
+                ? "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold btn-activo"
+                : "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold"
+            }
+            onClick={() => {
+              setInput("min");
+            }}
+          >
             Min
           </button>
-          <button className="btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold">
+          <button
+            className={
+              input == "hr"
+                ? "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold btn-activo"
+                : "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold"
+            }
+            onClick={() => {
+              setInput("hr");
+            }}
+          >
             Horas
           </button>
-          <button className="btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold">
+          <button
+            className={
+              input == "ds"
+                ? "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold btn-activo"
+                : "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold"
+            }
+            onClick={() => {
+              setInput("ds");
+            }}
+          >
             Dias
           </button>
         </div>
