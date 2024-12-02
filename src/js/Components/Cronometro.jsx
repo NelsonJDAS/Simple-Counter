@@ -9,7 +9,7 @@ const Cronometro = ({ tiempo }) => {
 
   const handleElementoTiempo = (e) => {
     setContador(e.target.value);
-    if (e.target.value > 999999999999999999999) {
+    if (e.target.value > 999999999999999999) {
       toast.error("Juanjo NO... no podras hoy");
       setContador(":(");
       InputRef.current.disabled = true;
