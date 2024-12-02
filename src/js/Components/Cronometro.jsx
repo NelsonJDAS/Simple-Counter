@@ -11,7 +11,7 @@ const Cronometro = ({ tiempo }) => {
     setContador(e.target.value);
     if (e.target.value > 999999999999999999) {
       InputRef.current.value = "";
-      toast.error("Juanjo NO... no podras hoy");
+      toast.error("No puedes romperme 😭");
       setContador(":(");
       InputRef.current.disabled = true;
     } else if (e.target.value == "" || e.target.value <= 0) {
