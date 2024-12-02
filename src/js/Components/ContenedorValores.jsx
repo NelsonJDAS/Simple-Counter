@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-const ContenedorValores = () => {
-  const [input, setInput] = useState("seg");
+const ContenedorValores = ({ tiempo, funcion }) => {
   return (
     <div className="contenedor-individual border rounded bg-black border-white row">
       <div className="col-12 text-center align-content-start">
@@ -17,48 +16,48 @@ const ContenedorValores = () => {
         <div className="d-flex justify-content-around">
           <button
             className={
-              input === "seg"
+              tiempo === "s"
                 ? "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold btn-activo"
                 : "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold"
             }
             onClick={() => {
-              setInput("seg");
+              funcion("s");
             }}
           >
             Seg
           </button>
           <button
             className={
-              input == "min"
+              tiempo == "min"
                 ? "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold btn-activo"
                 : "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold"
             }
             onClick={() => {
-              setInput("min");
+              funcion("min");
             }}
           >
             Min
           </button>
           <button
             className={
-              input == "hr"
+              tiempo == "h"
                 ? "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold btn-activo"
                 : "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold"
             }
             onClick={() => {
-              setInput("hr");
+              funcion("h");
             }}
           >
             Horas
           </button>
           <button
             className={
-              input == "ds"
+              tiempo == "d"
                 ? "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold btn-activo"
                 : "btn boton-valor text-white bg-transparent w-100 rounded-0 fw-bold"
             }
             onClick={() => {
-              setInput("ds");
+              funcion("d");
             }}
           >
             Dias

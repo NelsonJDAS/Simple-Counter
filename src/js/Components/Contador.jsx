@@ -1,24 +1,42 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { IoReload } from "react-icons/io5";
 import { FaPlay } from "react-icons/fa";
 import { FaPause } from "react-icons/fa6";
 import { TbNumbers } from "react-icons/tb";
 
 const Contador = () => {
-  const [contador, setContador] = useState(0);
+  const [contador, setContador] = useState("---");
   const [parar, setParar] = useState(false);
+  const ContadorRef = useRef(null);
+  const BtnPausaRef = useRef(null);
+  const BtnEmpezarRef = useRef(null);
+  const BtnReiniciarRef = useRef(null);
 
-  const AccionContador = (Accion) => {
-    const Contar = setInterval(() => {
-      if (Accion == "Empezar") {
-        setContador((prevContador) => prevContador + 1000000);
-      } else if (Accion == "Reiniciar") {
-        clearInterval(Contar);
-        setContador(0);
-      } else if (Accion == "Parar") {
-        setContador(Contador);
-      }
+  const Contador = () => {
+    if (contador === "---") {
+      setContador(0);
+    }
+    ContadorRef.current = setInterval(() => {
+      setContador((prevContador) => prevContador + 1);
     }, 1000);
+    if (!ContadorRef.current) {
+      clearInterval(ContadorRef.current);
+    }
+  };
+
+  const Empezar = () => {
+    BtnEmpezarRef.current.disabled = true;
+    Contador();
+  };
+
+  const Reiniciar = () => {
+    setContador("---");
+    clearInterval(ContadorRef.current);
+  };
+
+  const Pausar = () => {
+    BtnEmpezarRef.current.disabled = false;
+    clearInterval(ContadorRef.current);
   };
 
   return (
@@ -44,24 +62,27 @@ const Contador = () => {
           <button
             className="btn bg-black w-100 boton border-bottom-0 rounded-0 rounded-izquierdo border-start-0 border-end-0 border-dark boton-reiniciar text-danger"
             onClick={() => {
-              AccionContador("Reiniciar");
+              Reiniciar();
             }}
+            ref={BtnReiniciarRef}
           >
             <IoReload />
           </button>
           <button
             className="btn bg-black w-100 boton border-bottom-0 rounded-0 border-start-0 border-end-0 border-dark boton-parar text-warning"
             onClick={() => {
-              AccionContador("Parar");
+              Pausar();
             }}
+            ref={BtnPausaRef}
           >
             <FaPause />
           </button>
           <button
             className="btn bg-black w-100 boton border-bottom-0 rounded-0 rounded-derecho border-start-0 border-end-0 border-dark boton-empezar text-success "
             onClick={() => {
-              AccionContador("Empezar");
+              Empezar();
             }}
+            ref={BtnEmpezarRef}
           >
             <FaPlay />
           </button>

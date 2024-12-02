@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TiStopwatch } from "react-icons/ti";
 import { Toaster, toast } from "sonner";
 
-const Cronometro = ({ Tiempo }) => {
+const Cronometro = ({ tiempo }) => {
   const [contador, setContador] = useState("---");
   const CronometroRef = useRef(null);
   const InputRef = useRef(null);
@@ -11,13 +11,15 @@ const Cronometro = ({ Tiempo }) => {
     setContador(e.target.value);
     if (e.target.value > 999999999999999999999) {
       toast.error("Juanjo NO... no podras hoy");
+      setContador(":(");
       InputRef.current.disabled = true;
-    } else if (e.target.value == "") {
+    } else if (e.target.value == "" || e.target.value <= 0) {
       setContador("---");
     }
 
     if (e.key === "Enter") {
-      if (e.target.value == "") {
+      if (e.target.value == "" || e.target.value <= 0) {
+        InputRef.current.value = "";
         setContador("---");
         clearInterval(CronometroRef.current);
         toast.error("Pon un valor valido");
@@ -47,7 +49,7 @@ const Cronometro = ({ Tiempo }) => {
   if (contador === 0) {
     InputRef.current.disabled = false;
     clearInterval(CronometroRef.current);
-    toast.error("Cronometro finalizado");
+    toast.success("Cronometro finalizado");
   }
 
   return (
@@ -63,7 +65,7 @@ const Cronometro = ({ Tiempo }) => {
             .toString()
             .split("")
             .map((numero) => {
-              return <div className="num p-0 rounded mx-0">{numero}</div>;
+              return <div className="num rounded mx-0">{numero}</div>;
             })}
         </div>
       </div>

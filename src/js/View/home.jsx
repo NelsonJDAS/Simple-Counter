@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { createSwapy } from "swapy";
 import Contador from "../Components/Contador";
 import Cronometro from "../Components/Cronometro";
@@ -15,6 +15,8 @@ const Home = () => {
     });
   }, []);
 
+  const [tiempo, setTiempo] = useState("s"); // puede ser s, min, h, d
+
   return (
     <div className="align-content-center contenedor-pagina w-100 text-center">
       <Toaster position="top-center" richColors />
@@ -28,7 +30,7 @@ const Home = () => {
             data-swapy-slot="foo"
           >
             <div class="content-a" data-swapy-item="a">
-              <Contador />
+              <Contador tiempo={tiempo} />
             </div>
           </div>
 
@@ -38,7 +40,7 @@ const Home = () => {
           >
             <div class="content-b" data-swapy-item="b">
               <div class="handle" data-swapy-handle>
-                <ContenedorValores />
+                <ContenedorValores tiempo={tiempo} funcion={setTiempo} />
               </div>
             </div>
           </div>
@@ -48,7 +50,7 @@ const Home = () => {
             data-swapy-slot="baz"
           >
             <div class="content-c" data-swapy-item="c">
-              <ContenedorTiempoUsuario />
+              <ContenedorTiempoUsuario tiempo={tiempo} />
             </div>
           </div>
           <div
@@ -56,7 +58,7 @@ const Home = () => {
             data-swapy-slot="nar"
           >
             <div class="content-d" data-swapy-item="d">
-              <Cronometro />
+              <Cronometro tiempo={tiempo} />
             </div>
           </div>
         </div>

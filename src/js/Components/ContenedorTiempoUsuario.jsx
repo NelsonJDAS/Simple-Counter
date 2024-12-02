@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-const ContenedorTiempoUsuario = () => {
+const ContenedorTiempoUsuario = ({ tiempo }) => {
   const [tiempoUsuario, setTiempoUsuario] = useState(0);
-
   useEffect(() => {
     setInterval(() => {
       setTiempoUsuario((prevTiempoUsuario) => prevTiempoUsuario + 1);
     }, 1000);
   }, []);
+
   return (
     <div className="contenedor-individual border rounded bg-black border-white row">
       <div className="col-12 text-center align-content-start">
