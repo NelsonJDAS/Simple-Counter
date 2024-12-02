@@ -5,20 +5,27 @@ import { FaPause } from "react-icons/fa6";
 import { TbNumbers } from "react-icons/tb";
 
 const Contador = () => {
+  //Contador base del componente
   const [contador, setContador] = useState("---");
-  const [parar, setParar] = useState(false);
+
+  //Referencias para poder cambiar elementos sin actualizar en componente entero
   const ContadorRef = useRef(null);
   const BtnPausaRef = useRef(null);
   const BtnEmpezarRef = useRef(null);
   const BtnReiniciarRef = useRef(null);
 
   const Contador = () => {
+    //ejecuta el contador al 0 si tiene el valor incial
     if (contador === "---") {
       setContador(0);
     }
+
+    //creamos el intervalo del contador
     ContadorRef.current = setInterval(() => {
       setContador((prevContador) => prevContador + 1);
     }, 1000);
+
+    //evitamos crear doble intervalo, es decir que cuente dos veces seguidas
     if (!ContadorRef.current) {
       clearInterval(ContadorRef.current);
     }
@@ -31,6 +38,8 @@ const Contador = () => {
 
   const Reiniciar = () => {
     setContador("---");
+    BtnEmpezarRef.current.disabled = false;
+    //limpiamos el intervalo
     clearInterval(ContadorRef.current);
   };
 
@@ -49,7 +58,7 @@ const Contador = () => {
       </div>
       <div className="col-12 align-content-start px-0">
         <div className="d-flex justify-content-center border-top border-bottom border-dark">
-          {contador
+          {contador //convertimos el numero en string para poder hacerle un split y nos devuelva una lista para realizar el map
             .toString()
             .split("")
             .map((numero) => {

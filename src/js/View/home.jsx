@@ -8,6 +8,7 @@ import { Toaster, toast } from "sonner";
 
 //create your first component
 const Home = () => {
+  //Todo lo necesario para la libreria swapy
   useEffect(() => {
     const container = document.querySelector(".container");
     const swapy = createSwapy(container, {
@@ -15,16 +16,18 @@ const Home = () => {
     });
   }, []);
 
-  const [tiempo, setTiempo] = useState("s"); // puede ser s, min, h, d
+  const [tiempo, setTiempo] = useState("s"); // medida de tiempo, puede ser s, min, h, d
 
   return (
     <div className="align-content-center contenedor-pagina w-100 text-center">
       <Toaster position="top-center" richColors />
+      {/* Toaster libreria para alertas personalizadas */}
       <div className="text-center fw-bold text-white">
         <h1>Widgets Interactivos</h1>
       </div>
       <div class="container text-center">
         <div className="row w-100">
+          {/* Cada section ejecuta un cuadrado interactivo con cada componente */}
           <div
             class="section-1 contenedor-componente fondo border border-dark rounded col-4 m-3"
             data-swapy-slot="foo"

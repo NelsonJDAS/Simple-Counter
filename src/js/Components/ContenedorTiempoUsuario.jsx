@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 const ContenedorTiempoUsuario = ({ tiempo }) => {
   const [tiempoUsuario, setTiempoUsuario] = useState(0);
+
+  //Ejecutamos un useeffect para consguir el tiempo apenas se renderize el componente
   useEffect(() => {
     setInterval(() => {
       setTiempoUsuario((prevTiempoUsuario) => prevTiempoUsuario + 1);
